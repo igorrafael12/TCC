@@ -1,36 +1,38 @@
 <?php
-if (!isset($_GET['query']) || strlen(trim($_GET['query'])) < 3) {
-    exit;
-}
+if (isset($_GET['query'])) {
+    // Pega o texto que a pessoa digitou
+    $query = urlencode($_GET['query']);
 
-$query = urlencode($_GET['query']);
-$url = "https://www.googleapis.com/books/v1/volumes?q=" . $query;
+    // Monta o link para consultar o Google Books
+    $url = "https://www.googleapis.com/books/v1/volumes?q=$query";
 
-$response = file_get_contents($url);
-$data = json_decode($response, true);
+    // Pega a resposta do Google
+    $response = file_get_contents($url);
 
-if (!isset($data['items'])) {
-    echo "<p>Nenhum livro encontrado.</p>";
-    exit;
-}
+    // Transforma o resultado em um formato que o PHP entende
+    $data = json_decode($response, true);
 
-foreach ($data['items'] as $item) {
-    $volumeInfo = $item['volumeInfo'];
-    $titulo = $volumeInfo['title'] ?? 'Sem título';
-    $autores = isset($volumeInfo['authors']) ? implode(', ', $volumeInfo['authors']) : 'Desconhecido';
-    $thumbnail = $volumeInfo['imageLinks']['thumbnail'] ?? '';
+    // Se tiver resultados
+    if (!empty($data['items'])) {
+        foreach ($data['items'] as $item) {
+            $volume = $item['volumeInfo'];
+            $title = $volume['title'] ?? 'Sem título';
+            $authors = isset($volume['authors']) ? implode(', ', $volume['authors']) : 'Autor desconhecido';
+            $description = $volume['description'] ?? 'Descrição não disponível.';
+            $thumbnail = $volume['imageLinks']['thumbnail'] ?? '';
 
-    echo "<li>";
-    echo "<strong>Título:</strong> $titulo<br>";
-    echo "<strong>Autor:</strong> $autores<br>";
-    if ($thumbnail) {
-        echo "<img src='$thumbnail' alt='Capa do livro'><br>";
+            // Mostra cada livro com título, autor, descrição e foto
+            echo "<li>";
+            echo "<strong>$title</strong><br>";
+            echo "<em>Autor(es): $authors</em><br>";
+            echo "<p>$description</p>";
+            if ($thumbnail) {
+                echo "<img src='$thumbnail' alt='Capa do livro'>";
+            }
+            echo "</li>";
+        }
+    } else {
+        echo "<li>Nenhum livro encontrado.</li>";
     }
-    // Botão para cadastrar
-    echo "<form method='POST' action='' style='margin-top: 10px;'>";
-    echo "<input type='hidden' name='titulo' value=\"" . htmlspecialchars($titulo, ENT_QUOTES) . "\">";
-    echo "<input type='hidden' name='autor' value=\"" . htmlspecialchars($autores, ENT_QUOTES) . "\">";
-    echo "<button type='submit'>Cadastrar</button>";
-    echo "</form>";
-    echo "</li>";
 }
+?>
