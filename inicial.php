@@ -85,6 +85,7 @@
             <li><a href="back_end/professores/cadastrar_professores.php">Cadastrar Professores</a></li>
             <li><a href="back_end/emprestimo/cadastrar_emprestimos.php">Cadastrar Empréstimo</a></li>
             <li><a href="back_end/alunos/cadastrar_alunos.php">Cadastrar Alunos</a></li>
+            <a href="listas.php" class="btn-listas">Listas</a>
         </ul>
         <a href="logout.php">Sair</a>
 

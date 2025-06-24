@@ -21,14 +21,21 @@ if (isset($_GET['query'])) {
             $description = $volume['description'] ?? 'Descrição não disponível.';
             $thumbnail = $volume['imageLinks']['thumbnail'] ?? '';
 
-            // Mostra cada livro com título, autor, descrição e foto
             echo "<li>";
             echo "<strong>$title</strong><br>";
             echo "<em>Autor(es): $authors</em><br>";
             echo "<p>$description</p>";
             if ($thumbnail) {
-                echo "<img src='$thumbnail' alt='Capa do livro'>";
+                echo "<img src='$thumbnail' alt='Capa do livro'><br>";
             }
+
+            // Formulário para cadastrar o livro
+            echo "<form method='POST' action=''>
+                    <input type='hidden' name='titulo' value=\"" . htmlspecialchars($title, ENT_QUOTES) . "\">
+                    <input type='hidden' name='autor' value=\"" . htmlspecialchars($authors, ENT_QUOTES) . "\">
+                    <button type='submit'>Cadastrar</button>
+                  </form>";
+
             echo "</li>";
         }
     } else {

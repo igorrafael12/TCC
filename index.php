@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $professor = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Verifica se o professor existe e se a senha está correta
-    if (password_verify($password, $professor['senha'])) {
+    if ($professor && password_verify($password, $professor['senha'])) {
         // Armazena informações do professor na sessão
         $_SESSION['professor_id'] = $professor['id'];
         $_SESSION['professor_name'] = $professor['nome'];
@@ -35,57 +35,93 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bem-vindo Professor</title>
     <style>
-        /* Estilos básicos para o formulário */
+        /* Fundo Big Boss */
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
+            background: url('https://images6.alphacoders.com/138/1382518.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            color: #222;
         }
 
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Container com fundo transparente suave e maior padding à direita */
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px 60px 40px 35px; /* top right bottom left */
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
             width: 100%;
-            max-width: 400px;
+            max-width: 440px;
+            color: #222;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 28px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
 
         label {
             display: block;
             margin-bottom: 8px;
-            font-size: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #111;
+            text-align: left;
         }
 
         input[type="text"],
         input[type="password"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            border: 1.8px solid rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #111;  /* Letras escuras para visibilidade */
+            font-size: 18px; /* Maior */
+            font-weight: 700; /* Negrito */
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]::placeholder,
+        input[type="password"]::placeholder {
+            color: #333; /* Placeholder mais visível */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.25);
         }
 
         input[type="submit"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
         }
 
         input[type="submit"]:hover {
@@ -93,24 +129,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .error {
-            color: red;
-            margin-bottom: 15px;
+            color: #ff4444;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-shadow: 0 0 3px rgba(0,0,0,0.3);
         }
     </style>
 </head>
 <body>
-    <form method="POST" action="">
-        <h2>Bem-vindo Professor!</h2>
-        <?php if (isset($error)): ?>
-            <div class="error"><?= $error ?></div>
-        <?php endif; ?>
-        <label for="username">CPF:</label>
-        <input type="text" name="username" id="username" required>
+    <div class="container">
+        <form method="POST" action="">
+            <h2>Bem-vindo Professor!</h2>
+            <?php if (isset($error)): ?>
+                <div class="error"><?= htmlspecialchars($error) ?></div>
+            <?php endif; ?>
 
-        <label for="password">Senha:</label>
-        <input type="password" name="password" id="password" required>
+            <label for="username">CPF:</label>
+            <input type="text" name="username" id="username" placeholder="Digite seu CPF" required />
 
-        <input type="submit" value="Entrar">
-    </form>
+            <label for="password">Senha:</label>
+            <input type="password" name="password" id="password" placeholder="Digite sua senha" required />
+
+            <input type="submit" value="Entrar" />
+        </form>
+    </div>
 </body>
 </html>

@@ -101,21 +101,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titulo']) && isset($_
             margin-top: 10px;
         }
         .botao-voltar {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #2E7D32; /* Verde musgo */
-            color: white;
-            padding: 50px 20px;
-            width: 300px; /* Largura fixa do botão */
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: background 0.3s;
-            text-align: center; /* Para garantir que o texto fique centralizado */
-        }
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2E7D32;
+    color: white;
+    padding: 10px 20px;
+    width: auto;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: background 0.3s;
+    text-align: center;
+}
         .botao-voltar:hover {
             background-color: #1B5E20;
         }
