@@ -38,11 +38,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bem-vindo Professor</title>
+
+    <!-- Fonte Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
-        /* Fundo Big Boss */
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: url('https://images6.alphacoders.com/138/1382518.jpg') no-repeat center center fixed;
             background-size: cover;
             height: 100vh;
@@ -52,10 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #222;
         }
 
-        /* Container com fundo transparente suave e maior padding à direita */
         .container {
             background: rgba(255, 255, 255, 0.15);
-            padding: 40px 60px 40px 35px; /* top right bottom left */
+            padding: 40px 60px 40px 35px;
             border-radius: 16px;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
             width: 100%;
@@ -63,8 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #222;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
         }
 
         h2 {
@@ -91,16 +91,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border: 1.8px solid rgba(255, 255, 255, 0.6);
             border-radius: 10px;
             background-color: rgba(255, 255, 255, 0.15);
-            color: #111;  /* Letras escuras para visibilidade */
-            font-size: 18px; /* Maior */
-            font-weight: 700; /* Negrito */
+            color: #111;
+            font-size: 18px;
+            font-weight: 600;
             transition: border-color 0.3s ease;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         input[type="text"]::placeholder,
         input[type="password"]::placeholder {
-            color: #333; /* Placeholder mais visível */
+            color: #333;
         }
 
         input[type="text"]:focus,
@@ -122,10 +123,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-weight: 700;
             transition: background-color 0.3s ease;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         input[type="submit"]:hover {
             background-color: #45a049;
+        }
+
+        .esqueci-senha {
+            margin-top: 15px;
+            display: block;
+            font-size: 18px;
+            color:rgb(3, 180, 9);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .esqueci-senha:hover {
+            text-decoration: underline;
         }
 
         .error {
@@ -140,6 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <form method="POST" action="">
             <h2>Bem-vindo Professor!</h2>
+            
             <?php if (isset($error)): ?>
                 <div class="error"><?= htmlspecialchars($error) ?></div>
             <?php endif; ?>
@@ -151,6 +167,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" name="password" id="password" placeholder="Digite sua senha" required />
 
             <input type="submit" value="Entrar" />
+
+            <a href="recuperar_senha.php" class="esqueci-senha">Esqueci minha senha</a>
         </form>
     </div>
 </body>

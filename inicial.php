@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cadastro de Itens</title>
+
+    <!-- Fonte Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -12,7 +16,7 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-image: url('https://wallpapers.com/images/hd/euphoric-daft-punk-sci-fi-aesthetic-hd-epgolhmyg06xd7nb.jpg');
             background-size: cover;
             background-position: center;
@@ -67,14 +71,6 @@
         a:hover {
             transform: scale(1.05);
         }
-
-        /* Player Spotify estilo */
-        .spotify-player {
-            margin-top: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 20px #00ffff;
-            overflow: hidden;
-        }
     </style>
 </head>
 <body>
@@ -85,24 +81,9 @@
             <li><a href="back_end/professores/cadastrar_professores.php">Cadastrar Professores</a></li>
             <li><a href="back_end/emprestimo/cadastrar_emprestimos.php">Cadastrar Empréstimo</a></li>
             <li><a href="back_end/alunos/cadastrar_alunos.php">Cadastrar Alunos</a></li>
-            <a href="listas.php" class="btn-listas">Listas</a>
+            <li><a href="listas.php">Listas</a></li>
         </ul>
         <a href="logout.php">Sair</a>
-
-        <!-- Player Spotify atualizado -->
-        <div class="spotify-player">
-            <iframe 
-                style="border-radius:12px" 
-                src="https://open.spotify.com/embed/track/0oks4FnzhNp5QPTZtoet7c?utm_source=generator&theme=0" 
-                width="100%" 
-                height="152" 
-                frameborder="0" 
-                allowfullscreen="" 
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                loading="lazy"
-                title="Spotify Player"
-            ></iframe>
-        </div>
     </div>
 </body>
 </html>

@@ -2,12 +2,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Listas</title>
+    <!-- Fonte Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: url('https://wallpapercat.com/w/full/f/2/5/41291-3000x2000-desktop-hd-whiplash-background-photo.jpg') no-repeat center center fixed;
             background-size: cover;
             text-align: center;
@@ -19,6 +21,7 @@
             margin-bottom: 40px;
             font-size: 36px;
             text-shadow: 0 0 10px rgba(0,0,0,0.7);
+            font-weight: 600;
         }
 
         .btn {
@@ -31,7 +34,7 @@
             text-decoration: none;
             border-radius: 8px;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 600;
             transition: background-color 0.3s, transform 0.2s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
@@ -50,7 +53,7 @@
             text-decoration: none;
             border-radius: 8px;
             font-size: 17px;
-            font-weight: bold;
+            font-weight: 600;
             transition: background-color 0.3s, transform 0.2s;
         }
 

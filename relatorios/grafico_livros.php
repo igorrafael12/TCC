@@ -1,6 +1,19 @@
 <?php
 include '../back_end/config.php';
 
+// Consulta para aluno que mais pegou livros emprestados
+$sqlAlunoTop = "
+    SELECT a.nome, COUNT(e.id) AS total_emprestimos
+    FROM alunos a
+    JOIN emprestimos e ON e.alunos_id = a.id
+    GROUP BY a.id
+    ORDER BY total_emprestimos DESC
+    LIMIT 1
+";
+$stmtAluno = $pdo->prepare($sqlAlunoTop);
+$stmtAluno->execute();
+$topAluno = $stmtAluno->fetch(PDO::FETCH_ASSOC);
+
 // Gráfico 1: Livros mais emprestados (últimos 2 meses)
 $sql1 = "
     SELECT l.nome_livro, COUNT(e.id) AS total
@@ -36,15 +49,27 @@ $mensal = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #121212;
             padding: 40px;
             text-align: center;
+            color: #fcbf49;
         }
 
-        h2 {
-            margin-top: 40px;
-            color: #333;
+        h1 {
+            margin-bottom: 40px;
+            text-shadow: 0 0 8px #fcbf49;
+        }
+
+        .top-aluno {
+            background-color: #b37400;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px #fcbf49;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .grafico {
@@ -52,21 +77,28 @@ $mensal = $stmt2->fetchAll(PDO::FETCH_ASSOC);
             width: 90%;
             max-width: 900px;
             height: 400px;
+            background: #222;
+            border-radius: 12px;
+            box-shadow: 0 0 20px #fcbf49aa;
+            padding: 10px;
         }
 
         .btn-voltar {
             display: inline-block;
             margin-top: 40px;
             padding: 12px 24px;
-            background-color: #1976D2;
-            color: white;
+            background-color: #fcbf49;
+            color: #222;
             text-decoration: none;
             border-radius: 6px;
             font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 0 12px #fcbf49;
+            transition: background-color 0.3s;
         }
 
         .btn-voltar:hover {
-            background-color: #0D47A1;
+            background-color: #d99800;
         }
     </style>
 
@@ -89,7 +121,7 @@ $mensal = $stmt2->fetchAll(PDO::FETCH_ASSOC);
                 title: 'Livros Mais Emprestados (Últimos 2 meses)',
                 bars: 'horizontal',
                 hAxis: { title: 'Total de Empréstimos' },
-                colors: ['#4CAF50']
+                colors: ['#fcbf49']
             };
 
             const chart1 = new google.visualization.BarChart(document.getElementById('grafico1'));
@@ -109,7 +141,7 @@ $mensal = $stmt2->fetchAll(PDO::FETCH_ASSOC);
                 title: 'Quantidade de Empréstimos por Mês (Últimos 6 meses)',
                 curveType: 'function',
                 legend: { position: 'bottom' },
-                colors: ['#FF9800']
+                colors: ['#fcbf49']
             };
 
             const chart2 = new google.visualization.LineChart(document.getElementById('grafico2'));
@@ -119,6 +151,12 @@ $mensal = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <h1>Painel de Relatórios</h1>
+
+    <?php if ($topAluno): ?>
+        <div class="top-aluno">
+            Aluno que mais pegou livros emprestados: <strong><?= htmlspecialchars($topAluno['nome']) ?></strong> — <strong><?= $topAluno['total_emprestimos'] ?></strong> empréstimos
+        </div>
+    <?php endif; ?>
 
     <h2>Livros Mais Emprestados</h2>
     <div id="grafico1" class="grafico"></div>

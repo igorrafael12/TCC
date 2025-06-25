@@ -50,13 +50,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Cadastro de Professor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- Fonte Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: #fff;
             height: 100vh;
             background-image: url('https://c4.wallpaperflare.com/wallpaper/570/599/660/breaking-bad-heisenberg-walter-white-tv-wallpaper-preview.jpg');
@@ -76,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             max-width: 400px;
         }
         .mensagem {
-            font-family: 'Share Tech Mono', monospace;
+            font-weight: 600;
             text-align: center;
             margin-bottom: 15px;
             padding: 10px;
@@ -105,6 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
+            font-family: 'Poppins', sans-serif;
         }
         input[type="submit"] {
             width: 100%;
@@ -115,8 +121,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 4px;
             font-size: 16px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
             transition: background-color 0.3s;
+            font-family: 'Poppins', sans-serif;
         }
         input[type="submit"]:hover {
             background-color: #689F38;
@@ -137,7 +144,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             transition: background-color 0.3s;
             text-align: center;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
         }
         .botao-voltar:hover {
             background-color: #689F38;
@@ -148,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <?php if (!empty($mensagem)): ?>
             <div class="mensagem <?= $mensagemTipo ?>">
-                <?= $mensagem ?>
+                <?= htmlspecialchars($mensagem) ?>
             </div>
         <?php endif; ?>
 
@@ -157,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" id="nome" name="nome" required>
 
             <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" required>
+            <input type="text" id="cpf" name="cpf" required maxlength="11" pattern="\d{11}" title="Digite 11 dígitos numéricos">
 
             <label for="senha">Senha:</label>
             <input type="password" id="senha" name="senha" required>
@@ -169,6 +177,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 
-    <a href="javascript:history.back()" class="botao-voltar">Voltar</a>
+    <button onclick="history.back()" class="botao-voltar">Voltar</button>
 </body>
 </html>
