@@ -118,11 +118,39 @@ $mensal = $stmt2->fetchAll(PDO::FETCH_ASSOC);
             ]);
 
             const options1 = {
-                title: 'Livros Mais Emprestados (Últimos 2 meses)',
-                bars: 'horizontal',
-                hAxis: { title: 'Total de Empréstimos' },
-                colors: ['#fcbf49']
-            };
+    title: 'Livros Mais Emprestados (Últimos 2 meses)',
+    titleTextStyle: {
+        color: '#fcbf49',  // MESMA COR dos nomes dos livros
+        fontSize: 18,
+        bold: true
+    },
+    curveType: 'function',
+    backgroundColor: '#222',
+    chartArea: { width: '80%', height: '70%' },
+    legend: {
+        position: 'bottom',
+        textStyle: { color: '#fcbf49' }
+    },
+    hAxis: {
+        title: 'Mês',
+        textStyle: { color: '#fcbf49', fontSize: 13 },
+        titleTextStyle: { color: '#fcbf49', fontSize: 16 }
+    },
+    vAxis: {
+        title: 'Total',
+        textStyle: { color: '#fcbf49', fontSize: 13 },
+        titleTextStyle: { color: '#fcbf49', fontSize: 16 }
+    },
+    colors: ['#fcbf49'],
+    pointSize: 8,
+    lineWidth: 3,
+    animation: {
+        startup: true,
+        duration: 1000,
+        easing: 'inAndOut'
+    }
+};
+
 
             const chart1 = new google.visualization.BarChart(document.getElementById('grafico1'));
             chart1.draw(data1, options1);
@@ -138,11 +166,39 @@ $mensal = $stmt2->fetchAll(PDO::FETCH_ASSOC);
             ]);
 
             const options2 = {
-                title: 'Quantidade de Empréstimos por Mês (Últimos 6 meses)',
-                curveType: 'function',
-                legend: { position: 'bottom' },
-                colors: ['#fcbf49']
-            };
+    title: 'Quantidade de Empréstimos por Mês (Últimos 6 meses)',
+    titleTextStyle: {
+        color: '#fcbf49',  // MESMA COR dos nomes dos livros
+        fontSize: 18,
+        bold: true
+    },
+    curveType: 'function',
+    backgroundColor: '#222',
+    chartArea: { width: '80%', height: '70%' },
+    legend: {
+        position: 'bottom',
+        textStyle: { color: '#fcbf49' }
+    },
+    hAxis: {
+        title: 'Mês',
+        textStyle: { color: '#fcbf49', fontSize: 13 },
+        titleTextStyle: { color: '#fcbf49', fontSize: 16 }
+    },
+    vAxis: {
+        title: 'Total',
+        textStyle: { color: '#fcbf49', fontSize: 13 },
+        titleTextStyle: { color: '#fcbf49', fontSize: 16 }
+    },
+    colors: ['#fcbf49'],
+    pointSize: 8,
+    lineWidth: 3,
+    animation: {
+        startup: true,
+        duration: 1000,
+        easing: 'inAndOut'
+    }
+};
+
 
             const chart2 = new google.visualization.LineChart(document.getElementById('grafico2'));
             chart2.draw(data2, options2);
